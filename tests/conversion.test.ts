@@ -12,8 +12,14 @@ test("normalizes Japanese address text", () => {
   assert.equal(normalizeJapaneseAddressText("西新宿六丁目15番1"), "西新宿6-15-1");
   assert.equal(normalizeJapaneseAddressText("神宮前３－１－５"), "神宮前3-1-5");
   assert.equal(normalizeJapaneseAddressText("大塚町 １ー２ー３"), "大塚町 1-2-3");
+  assert.equal(normalizeJapaneseAddressText("大塚町 一の二の三"), "大塚町 1-2-3");
+  assert.equal(normalizeJapaneseAddressText("大塚町 １の２の３"), "大塚町 1-2-3");
+  assert.equal(normalizeJapaneseAddressText("大塚町 1の2の3"), "大塚町 1-2-3");
+  assert.equal(normalizeJapaneseAddressText("大塚町 一ー二ー三"), "大塚町 1-2-3");
   assert.equal(normalizeJapaneseAddressText("マンションＡ　２０２号室"), "マンションA 202");
   assert.equal(normalizeJapaneseAddressText("パークアベニュー ３０３"), "パークアベニュー 303");
+  assert.equal(normalizeJapaneseAddressText("山の上ハイツ 202"), "山の上ハイツ 202");
+  assert.equal(normalizeJapaneseAddressText("紀の川市"), "紀の川市");
 });
 
 test("builds UPS address line 1 with town latin", () => {
@@ -28,6 +34,14 @@ test("builds UPS address line 1 with town latin", () => {
   assert.equal(
     buildUpsAddressLine1({
       addressLine1: "大塚町 １ー２ー３",
+      townJa: "大塚町",
+      townLatin: "OTSUKACHO"
+    }),
+    "1-2-3 OTSUKACHO"
+  );
+  assert.equal(
+    buildUpsAddressLine1({
+      addressLine1: "大塚町 一の二の三",
       townJa: "大塚町",
       townLatin: "OTSUKACHO"
     }),
@@ -107,6 +121,31 @@ test("rejects postal records when prefecture or city input does not match", () =
       addressLine1: "5-6-7"
     }).record,
     undefined
+  );
+});
+
+test("keeps city names with の unchanged for Japan Post matching", () => {
+  const records = [
+    {
+      postalCode: "6496417",
+      prefectureJa: "和歌山県",
+      cityJa: "紀の川市",
+      townJa: "西大井",
+      prefectureLatin: "WAKAYAMA KEN",
+      cityLatin: "KINOKAWA SHI",
+      townLatin: "NISHIOI"
+    }
+  ];
+
+  assert.equal(
+    findJapanPostRecord({
+      records,
+      postalCode: "6496417",
+      prefectureJa: "和歌山県",
+      cityJa: "紀の川市",
+      addressLine1: "西大井1-2-3"
+    }).record?.cityJa,
+    "紀の川市"
   );
 });
 

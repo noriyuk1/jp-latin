@@ -18,6 +18,10 @@ const japaneseUnitMap: Record<string, number> = {
   "千": 1000
 };
 
+const addressNumberSequencePattern =
+  /[0-9〇零一二三四五六七八九十百千]+(?:[のーｰ‐‑‒–—―−－-][0-9〇零一二三四五六七八九十百千]+)+/g;
+const addressNumberSeparatorPattern = /[のーｰ‐‑‒–—―−－-]+/;
+
 export function normalizePostalCode(value: string): string {
   return value.normalize("NFKC").replace(/\D/g, "");
 }
@@ -49,9 +53,27 @@ function parseJapaneseNumber(value: string): number | null {
   return sawJapaneseNumber ? total + current : null;
 }
 
+function normalizeAddressNumberToken(value: string): string | null {
+  if (/^\d+$/.test(value)) return value;
+
+  const parsed = parseJapaneseNumber(value);
+  return parsed == null ? null : String(parsed);
+}
+
+function normalizeAddressNumberSequences(value: string): string {
+  return value.replace(addressNumberSequencePattern, (match) => {
+    const parts = match.split(addressNumberSeparatorPattern);
+    const normalizedParts = parts.map(normalizeAddressNumberToken);
+
+    if (normalizedParts.some((part) => part == null)) return match;
+    return normalizedParts.join("-");
+  });
+}
+
 export function normalizeJapaneseAddressText(value: string): string {
   return value
     .normalize("NFKC")
+    .replace(addressNumberSequencePattern, (match) => normalizeAddressNumberSequences(match))
     .replace(/([〇零一二三四五六七八九十百千]+)(?=丁目|番地|番|号室|号|階)/g, (match) => {
       const parsed = parseJapaneseNumber(match);
       return parsed == null ? match : String(parsed);
