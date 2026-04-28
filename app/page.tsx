@@ -184,7 +184,7 @@ export default async function HomePage({
               autoComplete="off"
               placeholder="下の氏名欄のフリガナをカタカナで入力してください。"
               required
-              defaultValue={value("nameKana")}
+              defaultValue={value("nameKana", "ヤマモト タケシ")}
             />
           </label>
 

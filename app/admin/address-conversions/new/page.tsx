@@ -19,6 +19,7 @@ export default function NewAddressConversionPage() {
               autoComplete="off"
               placeholder="下の氏名欄のフリガナをカタカナで入力してください。"
               required
+              defaultValue="ヤマモト タケシ"
             />
           </label>
 
