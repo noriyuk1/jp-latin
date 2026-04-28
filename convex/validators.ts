@@ -44,6 +44,7 @@ export const aiBuildingNameResultValidator = v.object({
   room_or_floor: v.union(v.string(), v.null()),
   confidence: confidenceValidator,
   needs_review: v.boolean(),
+  model: v.optional(v.string()),
   reason: v.string()
 });
 

@@ -33,10 +33,32 @@ main {
 .converter-shell {
   align-items: start;
   display: grid;
+  gap: 10px;
   justify-content: center;
   max-width: none;
   min-height: 100vh;
   padding: 8px 0 32px;
+}
+
+.examples-menu {
+  position: relative;
+  width: min(100vw, 420px);
+}
+
+.examples-menu[open] {
+  z-index: 1;
+}
+
+.example-trigger {
+  width: 100%;
+}
+
+.examples-menu summary {
+  list-style: none;
+}
+
+.examples-menu summary::-webkit-details-marker {
+  display: none;
 }
 
 .converter-card {
@@ -55,9 +77,13 @@ main {
 }
 
 .examples-panel {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   display: grid;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-top: 8px;
+  padding: 12px;
 }
 
 .example-title {

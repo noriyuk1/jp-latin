@@ -48,6 +48,7 @@ export default defineSchema({
         room_or_floor: v.union(v.string(), v.null()),
         confidence: v.union(v.literal("high"), v.literal("medium"), v.literal("low")),
         needs_review: v.boolean(),
+        model: v.optional(v.string()),
         reason: v.string()
       })
     ),

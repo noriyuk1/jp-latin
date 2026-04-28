@@ -48,6 +48,7 @@ export type BuildingNameConversionResult = {
   room_or_floor: string | null;
   confidence: Confidence;
   needs_review: boolean;
+  model?: string;
   reason: string;
 };
 

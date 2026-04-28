@@ -43,9 +43,10 @@ export const convert = action({
       throw new Error("OPENAI_API_KEY is not set in Convex");
     }
 
+    const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
     const openai = new OpenAI({ apiKey });
     const response = await openai.responses.create({
-      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+      model,
       input: [
         {
           role: "system",
@@ -80,6 +81,7 @@ Rules:
     const parsed = JSON.parse(response.output_text);
     return {
       ...parsed,
+      model,
       reason: `OpenAI GPT conversion via Convex action. ${parsed.reason}`
     };
   }

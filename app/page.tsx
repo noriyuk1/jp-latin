@@ -62,16 +62,10 @@ export default async function HomePage({
 
   return (
     <main className="converter-shell">
-      <section className="converter-card">
-        <div className="form-header">
-          <div>
-            <div className="eyebrow">Japanese address input</div>
-            <h1>UPS Latin converter</h1>
-          </div>
-        </div>
-
+      <details className="examples-menu">
+        <summary className="button link-button example-trigger">Example auto-fill</summary>
         <section className="examples-panel" aria-label="Example addresses">
-          <div className="example-title">Examples</div>
+          <div className="example-title">Choose an example</div>
           <div className="example-list">
             {exampleAddresses.map((example) => (
               <a
@@ -89,6 +83,15 @@ export default async function HomePage({
             ))}
           </div>
         </section>
+      </details>
+
+      <section className="converter-card">
+        <div className="form-header">
+          <div>
+            <div className="eyebrow">Japanese address input</div>
+            <h1>UPS Latin converter</h1>
+          </div>
+        </div>
 
         <form action="/api/address-conversions/create" method="post" className="stripe-form">
           <label className="stripe-field">

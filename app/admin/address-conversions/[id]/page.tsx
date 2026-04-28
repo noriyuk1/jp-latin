@@ -32,6 +32,12 @@ function OriginalRow({ label, value }: { label: string; value?: string }) {
   );
 }
 
+function formatModelName(model?: string) {
+  if (!model) return "GPT-4o-mini";
+  if (model.toLowerCase() === "gpt-4o-mini") return "GPT-4o-mini";
+  return model;
+}
+
 export default async function AddressConversionReviewPage({
   params
 }: {
@@ -131,9 +137,8 @@ export default async function AddressConversionReviewPage({
       {record.aiBuildingNameResult ? (
         <section className="panel stack" style={{ marginTop: 16 }}>
           <h2>Building-name conversion</h2>
-          <div>{record.aiBuildingNameResult.reason}</div>
+          <div>Model: {formatModelName(record.aiBuildingNameResult.model)}</div>
           <div>Confidence: {record.aiBuildingNameResult.confidence}</div>
-          <div>Model output: {record.aiBuildingNameResult.ups_address_line2}</div>
         </section>
       ) : null}
     </main>
