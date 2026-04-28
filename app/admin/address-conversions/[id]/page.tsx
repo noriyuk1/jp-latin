@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { ConfidenceHelp } from "./ConfidenceHelp.tsx";
 import { api, getConvexClient } from "../../../../lib/convex-client.ts";
 import { formatUpsState } from "../../../../lib/ups-format.ts";
 import type { Id } from "../../../../convex/_generated/dataModel";
@@ -139,32 +140,7 @@ export default async function AddressConversionReviewPage({
                 Model: {formatModelName(record.aiBuildingNameResult.model)}
                 <span className="confidence-line">
                   Confidence: {record.aiBuildingNameResult.confidence}
-                  <details className="confidence-help">
-                    <summary aria-label="Open confidence definition">ℹ️</summary>
-                    <div className="confidence-panel">
-                      <strong>Confidence definition</strong>
-                      <dl>
-                        <dt>high</dt>
-                        <dd>
-                          The model considers the Latin output straightforward and
-                          usable as-is, with no Japanese characters and room/unit info
-                          preserved.
-                        </dd>
-                        <dt>medium</dt>
-                        <dd>
-                          Usable-looking output, but the model had some uncertainty,
-                          usually because the building name could have multiple readings
-                          or styles.
-                        </dd>
-                        <dt>low</dt>
-                        <dd>
-                          Risky output, often because Japanese remains, the reading is
-                          unclear, or the model could not confidently preserve the
-                          building identity.
-                        </dd>
-                      </dl>
-                    </div>
-                  </details>
+                  <ConfidenceHelp />
                 </span>
               </p>
             ) : null}
