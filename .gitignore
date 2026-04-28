@@ -1,0 +1,13 @@
+node_modules
+.next
+dist
+coverage
+.env
+.env.local
+.netlify
+data/imports/*.csv
+data/runtime/*.json
+KEN_ALL_ROME.CSV
+
+# Local Netlify folder
+.netlify

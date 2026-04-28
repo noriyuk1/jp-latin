@@ -1,0 +1,28 @@
+{
+  "name": "jp-address-to-ups-latin-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "import:japan-post-rome": "node scripts/import-japan-post-rome.mjs",
+    "convex:codegen": "convex codegen",
+    "convex:deploy": "convex deploy"
+  },
+  "dependencies": {
+    "convex": "^1.36.1",
+    "next": "^15.3.0",
+    "openai": "^4.95.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "wanakana": "^5.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.0"
+  }
+}
