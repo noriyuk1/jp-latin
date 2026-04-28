@@ -25,7 +25,7 @@ export default function NewAddressConversionPage() {
 
           <label className="stripe-field">
             <span>氏名</span>
-            <input name="name" autoComplete="name" />
+            <input name="name" autoComplete="name" defaultValue="山本 剛士" />
           </label>
 
           <label className="stripe-field">

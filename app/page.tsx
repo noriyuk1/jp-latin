@@ -190,7 +190,7 @@ export default async function HomePage({
 
           <label className="stripe-field">
             <span>氏名</span>
-            <input name="name" autoComplete="name" defaultValue={value("name")} />
+            <input name="name" autoComplete="name" defaultValue={value("name", "山本 剛士")} />
           </label>
 
           <label className="stripe-field">
