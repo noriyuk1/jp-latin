@@ -66,9 +66,19 @@ export default async function AddressConversionReviewPage({
   const converted = record.converted
     ? { ...record.converted, state: formatUpsState(record.converted.state) }
     : undefined;
+  const upsPayload = converted
+    ? {
+        addressLine1: converted.addressLine1,
+        addressLine2: converted.addressLine2,
+        city: converted.city,
+        country: converted.country,
+        postalCode: converted.postalCode,
+        state: converted.state
+      }
+    : undefined;
 
   return (
-    <main>
+    <main className="output-page">
       <div className="topbar">
         <div>
           <div className="eyebrow">UPS Latin output</div>
@@ -79,67 +89,11 @@ export default async function AddressConversionReviewPage({
         </a>
       </div>
 
-      <div className="grid">
-        <section className="panel stack">
-          <h2>Original Japanese address</h2>
-          <OriginalRow label="Name" value={record.original.name} />
-          <OriginalRow label="Name reading" value={record.original.nameKana} />
-          <OriginalRow label="Prefecture" value={record.original.state} />
-          <OriginalRow label="City" value={record.original.city} />
-          <OriginalRow label="Address Line 1" value={record.original.addressLine1} />
-          <OriginalRow label="Address Line 2" value={record.original.addressLine2} />
-          <OriginalRow label="Postal code" value={record.original.postalCode} />
-          <OriginalRow label="Phone" value={record.original.phone} />
-        </section>
-
-        <section className="panel stack">
-          <h2>UPS-compatible Latin address</h2>
-          {converted ? (
-            <>
-              <div className="output-row">
-                <span>Name</span>
-                <strong>{converted.name || "-"}</strong>
-              </div>
-              <div className="output-row">
-                <span>Address Line 1</span>
-                <strong>{converted.addressLine1}</strong>
-              </div>
-              <div className="output-row">
-                <span>Address Line 2</span>
-                <strong>{converted.addressLine2 || "-"}</strong>
-              </div>
-              <div className="output-row">
-                <span>City</span>
-                <strong>{converted.city}</strong>
-              </div>
-              <div className="output-row">
-                <span>State</span>
-                <strong>{converted.state}</strong>
-              </div>
-              <div className="output-row">
-                <span>Postal code</span>
-                <strong>{converted.postalCode}</strong>
-              </div>
-              <div className="output-row">
-                <span>Country</span>
-                <strong>{converted.country}</strong>
-              </div>
-              <pre className="json-output">{JSON.stringify(converted, null, 2)}</pre>
-            </>
-          ) : (
-            <div className="notice error panel">
-              {record.reviewNotes || "No matching postal-code record was found."}
-            </div>
-          )}
-        </section>
-      </div>
-
       {record.aiBuildingNameResult ? (
-        <section className="panel stack" style={{ marginTop: 16 }}>
-          <h2>Building-name conversion</h2>
-          <div>Model: {formatModelName(record.aiBuildingNameResult.model)}</div>
-          <div className="confidence-line">
-            <span>Confidence: {record.aiBuildingNameResult.confidence}</span>
+        <section className="output-meta" aria-label="Building-name conversion">
+          <span>Model: {formatModelName(record.aiBuildingNameResult.model)}</span>
+          <span className="confidence-line">
+            Confidence: {record.aiBuildingNameResult.confidence}
             <details className="confidence-help">
               <summary aria-label="Open confidence definition">(i)</summary>
               <div className="confidence-panel">
@@ -163,9 +117,34 @@ export default async function AddressConversionReviewPage({
                 </dl>
               </div>
             </details>
-          </div>
+          </span>
         </section>
       ) : null}
+
+      <div className="output-grid">
+        <section className="panel stack">
+          <h2>Original Japanese address</h2>
+          <OriginalRow label="Name" value={record.original.name} />
+          <OriginalRow label="Name reading" value={record.original.nameKana} />
+          <OriginalRow label="Prefecture" value={record.original.state} />
+          <OriginalRow label="City" value={record.original.city} />
+          <OriginalRow label="Address Line 1" value={record.original.addressLine1} />
+          <OriginalRow label="Address Line 2" value={record.original.addressLine2} />
+          <OriginalRow label="Postal code" value={record.original.postalCode} />
+          <OriginalRow label="Phone" value={record.original.phone} />
+        </section>
+
+        <section className="panel stack">
+          <h2>UPS-compatible Latin address</h2>
+          {upsPayload ? (
+            <pre className="json-output">{JSON.stringify(upsPayload, null, 2)}</pre>
+          ) : (
+            <div className="notice error panel">
+              {record.reviewNotes || "No matching postal-code record was found."}
+            </div>
+          )}
+        </section>
+      </div>
     </main>
   );
 }

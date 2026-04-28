@@ -218,6 +218,57 @@ h2 {
   gap: 16px;
 }
 
+.output-page {
+  max-width: 1180px;
+  padding: 20px 24px;
+}
+
+.output-page .topbar {
+  margin-bottom: 10px;
+}
+
+.output-page .eyebrow {
+  font-size: 11px;
+}
+
+.output-page h1 {
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.output-page h2 {
+  font-size: 15px;
+}
+
+.output-page .panel {
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.output-page .stack {
+  gap: 8px;
+}
+
+.output-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(300px, 0.86fr) minmax(420px, 1.14fr);
+}
+
+.output-meta {
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 10px 18px;
+  margin-bottom: 12px;
+  padding: 7px 0;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -395,6 +446,11 @@ h2 {
   padding: 8px 0;
 }
 
+.output-page .output-row {
+  gap: 2px;
+  padding: 5px 0;
+}
+
 .output-row span {
   color: var(--muted);
   font-size: 12px;
@@ -402,8 +458,17 @@ h2 {
   text-transform: uppercase;
 }
 
+.output-page .output-row span {
+  font-size: 10px;
+}
+
 .output-row strong {
   font-size: 16px;
+}
+
+.output-page .output-row strong {
+  font-size: 14px;
+  line-height: 1.25;
 }
 
 .json-output {
@@ -415,6 +480,15 @@ h2 {
   margin: 8px 0 0;
   overflow-x: auto;
   padding: 14px;
+}
+
+.output-page .json-output {
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.42;
+  margin: 0;
+  min-height: 0;
+  padding: 12px 14px;
 }
 
 .confidence-line {
@@ -486,9 +560,14 @@ h2 {
   }
 
   .topbar,
-  .grid {
+  .grid,
+  .output-grid {
     grid-template-columns: 1fr;
     display: grid;
+  }
+
+  .output-page {
+    padding: 16px 14px;
   }
 
   .table {
