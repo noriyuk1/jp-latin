@@ -8,6 +8,8 @@ const exampleAddresses = [
   {
     label: "Noda, Chiba",
     address: {
+      name: "山田 太郎",
+      nameKana: "ヤマダ タロウ",
       postalCode: "2780026",
       state: "千葉県",
       city: "野田市",
@@ -18,6 +20,8 @@ const exampleAddresses = [
   {
     label: "Kashiwa, Chiba",
     address: {
+      name: "佐藤 花子",
+      nameKana: "サトウ ハナコ",
       postalCode: "2770026",
       state: "千葉県",
       city: "柏市",
@@ -28,6 +32,8 @@ const exampleAddresses = [
   {
     label: "Shinjuku, Tokyo",
     address: {
+      name: "鈴木 一郎",
+      nameKana: "スズキ イチロウ",
       postalCode: "1600023",
       state: "東京都",
       city: "新宿区",
@@ -38,11 +44,85 @@ const exampleAddresses = [
   {
     label: "Shibuya, Tokyo",
     address: {
+      name: "高橋 美咲",
+      nameKana: "タカハシ ミサキ",
       postalCode: "1500001",
       state: "東京都",
       city: "渋谷区",
       addressLine1: "神宮前3-1-5",
       addressLine2: "青山荘 305"
+    }
+  },
+  {
+    label: "Sapporo, Hokkaido",
+    address: {
+      name: "小林 大輔",
+      nameKana: "コバヤシ ダイスケ",
+      postalCode: "0640804",
+      state: "北海道",
+      city: "札幌市　中央区",
+      addressLine1: "南四条西5-10-1",
+      addressLine2: "ラ・メゾン北都 2F"
+    }
+  },
+  {
+    label: "Kushiro, Hokkaido",
+    address: {
+      name: "中村 葵",
+      nameKana: "ナカムラ アオイ",
+      postalCode: "0850836",
+      state: "北海道",
+      city: "釧路市",
+      addressLine1: "幣舞町3-7",
+      addressLine2: "リバーサイド釧路壱番館 301"
+    }
+  },
+  {
+    label: "Kanazawa, Ishikawa",
+    address: {
+      name: "松本 健",
+      nameKana: "マツモト ケン",
+      postalCode: "9200996",
+      state: "石川県",
+      city: "金沢市",
+      addressLine1: "油車12-4",
+      addressLine2: "犀川グリーンハイツ A-102"
+    }
+  },
+  {
+    label: "Kagoshima, Kagoshima",
+    address: {
+      name: "森 由紀",
+      nameKana: "モリ ユキ",
+      postalCode: "8920842",
+      state: "鹿児島県",
+      city: "鹿児島市",
+      addressLine1: "東千石町5-12",
+      addressLine2: "メゾン照国 4階"
+    }
+  },
+  {
+    label: "Naha, Okinawa",
+    address: {
+      name: "島袋 翔",
+      nameKana: "シマブクロ ショウ",
+      postalCode: "9000013",
+      state: "沖縄県",
+      city: "那覇市",
+      addressLine1: "牧志2-16-8",
+      addressLine2: "てぃーだ荘 205"
+    }
+  },
+  {
+    label: "Ishigaki, Okinawa",
+    address: {
+      name: "新垣 里奈",
+      nameKana: "アラカキ リナ",
+      postalCode: "9070012",
+      state: "沖縄県",
+      city: "石垣市",
+      addressLine1: "美崎町8-1",
+      addressLine2: "南ぬ島レジデンス 701"
     }
   }
 ];
@@ -80,6 +160,7 @@ export default async function HomePage({
                 <span>
                   {example.address.state} {example.address.city}
                 </span>
+                <span>{example.address.nameKana}</span>
                 <span>{example.address.addressLine1}</span>
               </a>
             ))}
@@ -102,6 +183,7 @@ export default async function HomePage({
               name="nameKana"
               autoComplete="off"
               placeholder="下の氏名欄のフリガナをカタカナで入力してください。"
+              required
               defaultValue={value("nameKana")}
             />
           </label>

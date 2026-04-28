@@ -17,6 +17,13 @@ export async function POST(request: Request) {
     );
   }
 
+  if (!body.original.nameKana?.trim()) {
+    return NextResponse.json(
+      { error: "氏名フリガナ is required for Latin name conversion" },
+      { status: 400 }
+    );
+  }
+
   const convex = requireConvexClient();
   const postalCode = normalizePostalCode(body.original.postalCode || "");
   const records = await convex.query(api.jpRomanZipRecords.list, { postalCode });

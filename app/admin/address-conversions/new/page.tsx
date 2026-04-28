@@ -18,6 +18,7 @@ export default function NewAddressConversionPage() {
               name="nameKana"
               autoComplete="off"
               placeholder="下の氏名欄のフリガナをカタカナで入力してください。"
+              required
             />
           </label>
 

@@ -62,6 +62,11 @@ test("converts Japanese name readings with WanaKana", () => {
     katakana: "ヤマダ タロウ",
     warnings: []
   });
+  assert.deepEqual(convertNameForUps(undefined, "サトウ ハナコ"), {
+    upsName: "SATOU HANAKO",
+    katakana: "サトウ ハナコ",
+    warnings: []
+  });
   assert.deepEqual(convertNameForUps("Taro Yamada"), {
     upsName: "TARO YAMADA",
     warnings: []
