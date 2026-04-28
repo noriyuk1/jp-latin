@@ -122,8 +122,10 @@ export default async function OutputPage({
           <div>
             <strong>Address database</strong>
             <p>
-              <code>addressLine1</code> and <code>city</code> are built from the
-              official Japan Post romanized CSV database from{" "}
+              <code>addressLine1</code>, <code>city</code>, <code>state</code>,{" "}
+              <code>postalCode</code>, and <code>country</code> are formatted for
+              UPS using Japan Post romanized address data, the entered postal code,
+              and Japan&apos;s ISO country code <code>JP</code> from{" "}
               <a href="https://www.post.japanpost.jp/zipcode/dl/roman-zip.html">
                 post.japanpost.jp&apos;s public data
               </a>.
