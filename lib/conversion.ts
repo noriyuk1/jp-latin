@@ -6,6 +6,7 @@ import { normalizePostalCode } from "./normalize.ts";
 import { validateUpsAddressPayload } from "./validation.ts";
 import type {
   ConversionResult,
+  BuildingNameConversionResult,
   JapanPostRomanZipRecord,
   OriginalJapaneseAddress,
   UpsAddressPayload
@@ -15,6 +16,12 @@ export async function convertJapaneseAddressToUpsLatin(input: {
   orderId: string;
   address: OriginalJapaneseAddress;
   records: JapanPostRomanZipRecord[];
+  convertBuildingName?: (input: {
+    addressLine2: string;
+    prefectureLatin?: string;
+    cityLatin?: string;
+    townLatin?: string;
+  }) => Promise<BuildingNameConversionResult>;
 }): Promise<ConversionResult> {
   const postalCode = normalizePostalCode(input.address.postalCode);
   const reviewReasons: string[] = [];
@@ -55,7 +62,8 @@ export async function convertJapaneseAddressToUpsLatin(input: {
   let aiResult;
 
   if (input.address.addressLine2?.trim()) {
-    aiResult = await convertBuildingNameWithAI({
+    const buildingNameConverter = input.convertBuildingName || convertBuildingNameWithAI;
+    aiResult = await buildingNameConverter({
       addressLine2: input.address.addressLine2,
       prefectureLatin: lookup.record.prefectureLatin,
       cityLatin: lookup.record.cityLatin,
@@ -88,7 +96,6 @@ export async function convertJapaneseAddressToUpsLatin(input: {
     return {
       status: "needs_review",
       reason: validation.reason,
-      payload,
       aiResult,
       reviewReasons: [...reviewReasons, validation.reason, ...validation.warnings],
       jpRecord: lookup.record

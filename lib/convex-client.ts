@@ -1,9 +1,10 @@
-import { fetchMutation, fetchQuery } from "convex/nextjs";
+import { fetchAction, fetchMutation, fetchQuery } from "convex/nextjs";
 import { api } from "../convex/_generated/api";
 
 export { api };
 
 const convexServerClient = {
+  action: fetchAction,
   query: fetchQuery,
   mutation: fetchMutation
 };

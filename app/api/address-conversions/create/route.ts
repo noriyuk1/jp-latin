@@ -23,7 +23,8 @@ export async function POST(request: Request) {
   const result = await convertJapaneseAddressToUpsLatin({
     orderId: body.orderId,
     address: body.original,
-    records
+    records,
+    convertBuildingName: (input) => convex.action(api.buildingNames.convert, input)
   });
 
   const reviewNotes = result.reviewReasons.join("; ") || result.reason;

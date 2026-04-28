@@ -9,6 +9,7 @@
  */
 
 import type * as addressConversions from "../addressConversions.js";
+import type * as buildingNames from "../buildingNames.js";
 import type * as demo from "../demo.js";
 import type * as jpRomanZipRecords from "../jpRomanZipRecords.js";
 import type * as validators from "../validators.js";
@@ -21,6 +22,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   addressConversions: typeof addressConversions;
+  buildingNames: typeof buildingNames;
   demo: typeof demo;
   jpRomanZipRecords: typeof jpRomanZipRecords;
   validators: typeof validators;
