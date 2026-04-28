@@ -89,38 +89,6 @@ export default async function AddressConversionReviewPage({
         </a>
       </div>
 
-      {record.aiBuildingNameResult ? (
-        <section className="output-meta" aria-label="Building-name conversion">
-          <span>Model: {formatModelName(record.aiBuildingNameResult.model)}</span>
-          <span className="confidence-line">
-            Confidence: {record.aiBuildingNameResult.confidence}
-            <details className="confidence-help">
-              <summary aria-label="Open confidence definition">ℹ️</summary>
-              <div className="confidence-panel">
-                <strong>Confidence definition</strong>
-                <dl>
-                  <dt>high</dt>
-                  <dd>
-                    GPT believes the Latin output is straightforward and should be usable
-                    as-is, with no Japanese characters and room/unit info preserved.
-                  </dd>
-                  <dt>medium</dt>
-                  <dd>
-                    Usable-looking output, but the model had some uncertainty, usually
-                    because the building name could have multiple readings or styles.
-                  </dd>
-                  <dt>low</dt>
-                  <dd>
-                    Risky output, often because Japanese remains, the reading is unclear,
-                    or the model could not confidently preserve the building identity.
-                  </dd>
-                </dl>
-              </div>
-            </details>
-          </span>
-        </section>
-      ) : null}
-
       <div className="output-grid">
         <section className="panel stack">
           <h2>Original Japanese address</h2>
@@ -145,6 +113,68 @@ export default async function AddressConversionReviewPage({
           )}
         </section>
       </div>
+
+      <section className="output-explanation" aria-label="How this app works">
+        <h2>How this app works</h2>
+        <div className="conversion-notes">
+          <div>
+            <strong>Address database</strong>
+            <p>
+              <code>addressLine1</code> and <code>city</code> are built from the
+              official Japan Post romanized CSV database from post.japanpost.jp.
+            </p>
+          </div>
+          <div>
+            <strong>Building-name conversion</strong>
+            <p>
+              <code>addressLine2</code> is converted by OpenAI through a Convex
+              backend action so Japanese building names become UPS-compatible Latin text.
+            </p>
+            {record.aiBuildingNameResult ? (
+              <p className="conversion-meta">
+                Model: {formatModelName(record.aiBuildingNameResult.model)}
+                <span className="confidence-line">
+                  Confidence: {record.aiBuildingNameResult.confidence}
+                  <details className="confidence-help">
+                    <summary aria-label="Open confidence definition">ℹ️</summary>
+                    <div className="confidence-panel">
+                      <strong>Confidence definition</strong>
+                      <dl>
+                        <dt>high</dt>
+                        <dd>
+                          GPT believes the Latin output is straightforward and should be
+                          usable as-is, with no Japanese characters and room/unit info
+                          preserved.
+                        </dd>
+                        <dt>medium</dt>
+                        <dd>
+                          Usable-looking output, but the model had some uncertainty,
+                          usually because the building name could have multiple readings
+                          or styles.
+                        </dd>
+                        <dt>low</dt>
+                        <dd>
+                          Risky output, often because Japanese remains, the reading is
+                          unclear, or the model could not confidently preserve the
+                          building identity.
+                        </dd>
+                      </dl>
+                    </div>
+                  </details>
+                </span>
+              </p>
+            ) : null}
+          </div>
+          <div>
+            <strong>Name yomigana</strong>
+            <p>
+              The entered kana reading is converted to Latin letters with{" "}
+              <a href="https://github.com/WaniKani/WanaKana">WanaKana</a>. Kanji
+              name readings are not guessed automatically.
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
