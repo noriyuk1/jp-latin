@@ -69,6 +69,7 @@ export default async function AddressConversionReviewPage({
     : undefined;
   const upsPayload = converted
     ? {
+        name: converted.name,
         addressLine1: converted.addressLine1,
         addressLine2: converted.addressLine2,
         city: converted.city,
