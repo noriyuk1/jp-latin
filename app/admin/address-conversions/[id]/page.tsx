@@ -1,6 +1,36 @@
 import { notFound } from "next/navigation";
 import { api, getConvexClient } from "../../../../lib/convex-client.ts";
+import { formatUpsState } from "../../../../lib/ups-format.ts";
 import type { Id } from "../../../../convex/_generated/dataModel";
+
+function buildBackHref(original: {
+  name?: string;
+  nameKana?: string;
+  country: string;
+  postalCode: string;
+  state?: string;
+  city?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  phone?: string;
+}) {
+  const params = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(original)) {
+    if (value) params.set(key, value);
+  }
+
+  return `/?${params.toString()}`;
+}
+
+function OriginalRow({ label, value }: { label: string; value?: string }) {
+  return (
+    <div className="output-row">
+      <span>{label}</span>
+      <strong>{value || "-"}</strong>
+    </div>
+  );
+}
 
 export default async function AddressConversionReviewPage({
   params
@@ -26,6 +56,11 @@ export default async function AddressConversionReviewPage({
 
   if (!record) notFound();
 
+  const backHref = buildBackHref(record.original);
+  const converted = record.converted
+    ? { ...record.converted, state: formatUpsState(record.converted.state) }
+    : undefined;
+
   return (
     <main>
       <div className="topbar">
@@ -33,57 +68,57 @@ export default async function AddressConversionReviewPage({
           <div className="eyebrow">UPS Latin output</div>
           <h1>{record.orderId}</h1>
         </div>
-        <a className="button link-button" href="/">
-          Convert another
+        <a className="button link-button" href={backHref}>
+          Back
         </a>
       </div>
 
       <div className="grid">
         <section className="panel stack">
           <h2>Original Japanese address</h2>
-          <div>{record.original.name}</div>
-          <div>{record.original.nameKana}</div>
-          <div>{record.original.state}</div>
-          <div>{record.original.city}</div>
-          <div>{record.original.addressLine1}</div>
-          <div>{record.original.addressLine2}</div>
-          <div>{record.original.postalCode}</div>
-          <div>{record.original.phone}</div>
+          <OriginalRow label="Name" value={record.original.name} />
+          <OriginalRow label="Name reading" value={record.original.nameKana} />
+          <OriginalRow label="Prefecture" value={record.original.state} />
+          <OriginalRow label="City" value={record.original.city} />
+          <OriginalRow label="Address Line 1" value={record.original.addressLine1} />
+          <OriginalRow label="Address Line 2" value={record.original.addressLine2} />
+          <OriginalRow label="Postal code" value={record.original.postalCode} />
+          <OriginalRow label="Phone" value={record.original.phone} />
         </section>
 
         <section className="panel stack">
           <h2>UPS-compatible Latin address</h2>
-          {record.converted ? (
+          {converted ? (
             <>
               <div className="output-row">
                 <span>Name</span>
-                <strong>{record.converted.name || "-"}</strong>
+                <strong>{converted.name || "-"}</strong>
               </div>
               <div className="output-row">
                 <span>Address Line 1</span>
-                <strong>{record.converted.addressLine1}</strong>
+                <strong>{converted.addressLine1}</strong>
               </div>
               <div className="output-row">
                 <span>Address Line 2</span>
-                <strong>{record.converted.addressLine2 || "-"}</strong>
+                <strong>{converted.addressLine2 || "-"}</strong>
               </div>
               <div className="output-row">
                 <span>City</span>
-                <strong>{record.converted.city}</strong>
+                <strong>{converted.city}</strong>
               </div>
               <div className="output-row">
                 <span>State</span>
-                <strong>{record.converted.state}</strong>
+                <strong>{converted.state}</strong>
               </div>
               <div className="output-row">
                 <span>Postal code</span>
-                <strong>{record.converted.postalCode}</strong>
+                <strong>{converted.postalCode}</strong>
               </div>
               <div className="output-row">
                 <span>Country</span>
-                <strong>{record.converted.country}</strong>
+                <strong>{converted.country}</strong>
               </div>
-              <pre className="json-output">{JSON.stringify(record.converted, null, 2)}</pre>
+              <pre className="json-output">{JSON.stringify(converted, null, 2)}</pre>
             </>
           ) : (
             <div className="notice error panel">

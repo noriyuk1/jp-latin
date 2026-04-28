@@ -5,6 +5,7 @@ import { fallbackConvertBuildingName } from "../lib/building-name.ts";
 import { findJapanPostRecord, mapJapanPostRomanCsvRow } from "../lib/japan-post.ts";
 import { convertNameForUps } from "../lib/name.ts";
 import { normalizeJapaneseAddressText } from "../lib/normalize.ts";
+import { formatUpsState } from "../lib/ups-format.ts";
 import { validateUpsAddressPayload } from "../lib/validation.ts";
 
 test("normalizes Japanese address text", () => {
@@ -121,6 +122,13 @@ test("maps official KEN_ALL_ROME.CSV rows", () => {
       "OTSUKACHO"
     ]
   });
+});
+
+test("formats UPS state without Japanese administrative suffixes", () => {
+  assert.equal(formatUpsState("CHIBA KEN"), "CHIBA");
+  assert.equal(formatUpsState("TOKYO TO"), "TOKYO");
+  assert.equal(formatUpsState("OSAKA FU"), "OSAKA");
+  assert.equal(formatUpsState("HOKKAIDO"), "HOKKAIDO");
 });
 
 test("validates UPS-safe payloads", () => {

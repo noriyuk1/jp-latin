@@ -3,6 +3,7 @@ import { convertBuildingNameWithAI } from "./building-name.ts";
 import { findJapanPostRecord } from "./japan-post.ts";
 import { convertNameForUps } from "./name.ts";
 import { normalizePostalCode } from "./normalize.ts";
+import { formatUpsState } from "./ups-format.ts";
 import { validateUpsAddressPayload } from "./validation.ts";
 import type {
   ConversionResult,
@@ -85,7 +86,7 @@ export async function convertJapaneseAddressToUpsLatin(input: {
     addressLine1,
     addressLine2,
     city: lookup.record.cityLatin,
-    state: lookup.record.prefectureLatin,
+    state: formatUpsState(lookup.record.prefectureLatin),
     postalCode,
     country: "JP",
     phone: input.address.phone
