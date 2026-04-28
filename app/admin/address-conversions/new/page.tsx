@@ -14,7 +14,11 @@ export default function NewAddressConversionPage() {
         <form action="/api/address-conversions/create" method="post" className="stripe-form">
           <label className="stripe-field">
             <span>氏名フリガナ</span>
-            <input name="nameKana" autoComplete="off" placeholder="ヤマダ タロウ" />
+            <input
+              name="nameKana"
+              autoComplete="off"
+              placeholder="下の氏名欄のフリガナをカタカナで入力してください。"
+            />
           </label>
 
           <label className="stripe-field">
@@ -52,14 +56,19 @@ export default function NewAddressConversionPage() {
 
           <label className="stripe-field">
             <span>住所（1 行目）</span>
-            <input name="addressLine1" required placeholder="番地" defaultValue="大塚町1-2-3" />
+            <input
+              name="addressLine1"
+              required
+              placeholder="町名・番地（例：神宮前3-1-5）"
+              defaultValue="大塚町1-2-3"
+            />
           </label>
 
           <label className="stripe-field">
             <span>住所（2 行目）</span>
             <input
               name="addressLine2"
-              placeholder="建物名、部屋番号など（省略可）"
+              placeholder="建物名・部屋番号（該当する方は必須）"
               defaultValue="サクラハイツ 202"
             />
           </label>

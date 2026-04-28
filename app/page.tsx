@@ -99,7 +99,7 @@ export default async function HomePage({
             <input
               name="nameKana"
               autoComplete="off"
-              placeholder="ヤマダ タロウ"
+              placeholder="下の氏名欄のフリガナをカタカナで入力してください。"
               defaultValue={value("nameKana")}
             />
           </label>
@@ -147,7 +147,7 @@ export default async function HomePage({
             <input
               name="addressLine1"
               required
-              placeholder="番地"
+              placeholder="町名・番地（例：神宮前3-1-5）"
               defaultValue={value("addressLine1", "大塚町1-2-3")}
             />
           </label>
@@ -156,7 +156,7 @@ export default async function HomePage({
             <span>住所（2 行目）</span>
             <input
               name="addressLine2"
-              placeholder="建物名、部屋番号など（省略可）"
+              placeholder="建物名・部屋番号（該当する方は必須）"
               defaultValue={value("addressLine2", "サクラハイツ 202")}
             />
           </label>
