@@ -56,6 +56,7 @@ export function normalizeJapaneseAddressText(value: string): string {
       const parsed = parseJapaneseNumber(match);
       return parsed == null ? match : String(parsed);
     })
+    .replace(/(?<=\d)[ーｰ](?=\d)/g, "-")
     .replace(/[‐‑‒–—―−－]/g, "-")
     .replace(/丁目/g, "-")
     .replace(/番地/g, "-")

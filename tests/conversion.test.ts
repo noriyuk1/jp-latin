@@ -11,7 +11,9 @@ import { validateUpsAddressPayload } from "../lib/validation.ts";
 test("normalizes Japanese address text", () => {
   assert.equal(normalizeJapaneseAddressText("西新宿六丁目15番1"), "西新宿6-15-1");
   assert.equal(normalizeJapaneseAddressText("神宮前３－１－５"), "神宮前3-1-5");
+  assert.equal(normalizeJapaneseAddressText("大塚町 １ー２ー３"), "大塚町 1-2-3");
   assert.equal(normalizeJapaneseAddressText("マンションＡ　２０２号室"), "マンションA 202");
+  assert.equal(normalizeJapaneseAddressText("パークアベニュー ３０３"), "パークアベニュー 303");
 });
 
 test("builds UPS address line 1 with town latin", () => {
@@ -22,6 +24,14 @@ test("builds UPS address line 1 with town latin", () => {
       townLatin: "Jingumae"
     }),
     "3-1-5 Jingumae"
+  );
+  assert.equal(
+    buildUpsAddressLine1({
+      addressLine1: "大塚町 １ー２ー３",
+      townJa: "大塚町",
+      townLatin: "OTSUKACHO"
+    }),
+    "1-2-3 OTSUKACHO"
   );
   assert.equal(
     buildUpsAddressLine1({
