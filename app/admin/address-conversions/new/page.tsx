@@ -2,25 +2,22 @@ export default function NewAddressConversionPage() {
   return (
     <main className="converter-shell">
       <section className="converter-card">
-      <div className="topbar">
+      <div className="form-header">
         <div>
           <div className="eyebrow">Japanese address input</div>
           <h1>UPS Latin converter</h1>
         </div>
-        <a className="button link-button" href="/admin/address-conversions">
-          History
-        </a>
       </div>
 
         <form action="/api/address-conversions/create" method="post" className="stripe-form">
           <label className="stripe-field">
-            <span>氏名</span>
-            <input name="name" autoComplete="name" />
+            <span>氏名フリガナ</span>
+            <input name="nameKana" autoComplete="off" placeholder="ヤマダ タロウ" />
           </label>
 
           <label className="stripe-field">
-            <span>フリガナ</span>
-            <input name="nameKana" autoComplete="off" placeholder="ヤマダ タロウ" />
+            <span>氏名</span>
+            <input name="name" autoComplete="name" />
           </label>
 
           <label className="stripe-field">

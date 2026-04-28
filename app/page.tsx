@@ -2,6 +2,54 @@ function firstParam(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
 
+const exampleAddresses = [
+  {
+    label: "Noda, Chiba",
+    address: {
+      postalCode: "2780026",
+      state: "千葉県",
+      city: "野田市",
+      addressLine1: "花井250-79",
+      addressLine2: "ボンジュール荘 202"
+    }
+  },
+  {
+    label: "Kashiwa, Chiba",
+    address: {
+      postalCode: "2770026",
+      state: "千葉県",
+      city: "柏市",
+      addressLine1: "大塚町1-2-3",
+      addressLine2: "サクラハイツ 202"
+    }
+  },
+  {
+    label: "Shinjuku, Tokyo",
+    address: {
+      postalCode: "1600023",
+      state: "東京都",
+      city: "新宿区",
+      addressLine1: "西新宿6-15-1",
+      addressLine2: "セントラルパークタワー・ラ・トゥール新宿 1404"
+    }
+  },
+  {
+    label: "Shibuya, Tokyo",
+    address: {
+      postalCode: "1500001",
+      state: "東京都",
+      city: "渋谷区",
+      addressLine1: "神宮前3-1-5",
+      addressLine2: "青山荘 305"
+    }
+  }
+];
+
+function exampleHref(address: Record<string, string>) {
+  const params = new URLSearchParams(address);
+  return `/?${params.toString()}`;
+}
+
 export default async function HomePage({
   searchParams
 }: {
@@ -18,25 +66,42 @@ export default async function HomePage({
             <div className="eyebrow">Japanese address input</div>
             <h1>UPS Latin converter</h1>
           </div>
-          <a className="button link-button" href="/admin/address-conversions">
-            History
-          </a>
         </div>
+
+        <section className="examples-panel" aria-label="Example addresses">
+          <div className="example-title">Examples</div>
+          <div className="example-list">
+            {exampleAddresses.map((example) => (
+              <a
+                className="example-card"
+                href={exampleHref(example.address)}
+                key={example.label}
+              >
+                <strong>{example.label}</strong>
+                <span>{example.address.postalCode}</span>
+                <span>
+                  {example.address.state} {example.address.city}
+                </span>
+                <span>{example.address.addressLine1}</span>
+              </a>
+            ))}
+          </div>
+        </section>
 
         <form action="/api/address-conversions/create" method="post" className="stripe-form">
           <label className="stripe-field">
-            <span>氏名</span>
-            <input name="name" autoComplete="name" defaultValue={value("name")} />
-          </label>
-
-          <label className="stripe-field">
-            <span>フリガナ</span>
+            <span>氏名フリガナ</span>
             <input
               name="nameKana"
               autoComplete="off"
               placeholder="ヤマダ タロウ"
               defaultValue={value("nameKana")}
             />
+          </label>
+
+          <label className="stripe-field">
+            <span>氏名</span>
+            <input name="name" autoComplete="name" defaultValue={value("name")} />
           </label>
 
           <label className="stripe-field">

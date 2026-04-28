@@ -54,6 +54,48 @@ main {
   margin-bottom: 16px;
 }
 
+.examples-panel {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.example-title {
+  color: #4d465c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.example-list {
+  display: grid;
+  gap: 8px;
+}
+
+.example-card {
+  background: #eef6ff;
+  border: 1px solid #c7d7ec;
+  border-radius: 6px;
+  color: #4d465c;
+  display: grid;
+  gap: 2px;
+  padding: 9px 10px;
+  text-decoration: none;
+}
+
+.example-card:hover {
+  border-color: #8fb6df;
+}
+
+.example-card strong {
+  color: #202124;
+  font-size: 14px;
+}
+
+.example-card span {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 .stripe-form {
   display: grid;
   gap: 14px;
