@@ -1,3 +1,5 @@
+import { japanesePrefectures } from "../lib/prefectures.ts";
+
 function firstParam(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
@@ -124,8 +126,11 @@ export default async function HomePage({
           <label className="stripe-field">
             <span>都道府県</span>
             <select name="state" defaultValue={value("state", "千葉県")}>
-              <option value="千葉県">千葉県 - Chiba</option>
-              <option value="東京都">東京都 - Tokyo</option>
+              {japanesePrefectures.map(([prefectureJa, prefectureEn]) => (
+                <option key={prefectureJa} value={prefectureJa}>
+                  {prefectureJa} - {prefectureEn}
+                </option>
+              ))}
             </select>
           </label>
 

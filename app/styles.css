@@ -1,12 +1,12 @@
 :root {
   color-scheme: light;
-  --bg: #f7f7f4;
+  --bg: #f6f6f6;
   --panel: #ffffff;
   --text: #202124;
-  --muted: #62666d;
-  --border: #d9d8d2;
-  --accent: #0f766e;
-  --danger: #b42318;
+  --muted: #666666;
+  --border: #d8d8d8;
+  --accent: #202124;
+  --danger: #4a4a4a;
 }
 
 * {
@@ -40,8 +40,8 @@ main {
 }
 
 .converter-card {
-  background: #dfeaf8;
-  border: 1px solid #cbd8ec;
+  background: #f2f2f2;
+  border: 1px solid #d8d8d8;
   min-height: 100vh;
   padding: 16px;
   width: min(100vw, 420px);
@@ -61,7 +61,7 @@ main {
 }
 
 .example-title {
-  color: #4d465c;
+  color: #4a4a4a;
   font-size: 13px;
   font-weight: 700;
 }
@@ -72,10 +72,10 @@ main {
 }
 
 .example-card {
-  background: #eef6ff;
-  border: 1px solid #c7d7ec;
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
   border-radius: 6px;
-  color: #4d465c;
+  color: #4a4a4a;
   display: grid;
   gap: 2px;
   padding: 9px 10px;
@@ -83,7 +83,7 @@ main {
 }
 
 .example-card:hover {
-  border-color: #8fb6df;
+  border-color: #8a8a8a;
 }
 
 .example-card strong {
@@ -102,7 +102,7 @@ main {
 }
 
 .stripe-field {
-  color: #4d465c;
+  color: #4a4a4a;
   display: grid;
   font-size: 13px;
   font-weight: 700;
@@ -112,11 +112,11 @@ main {
 .stripe-field input,
 .stripe-field select {
   appearance: none;
-  background: #eef6ff;
-  border: 1px solid #c7d7ec;
+  background: #ffffff;
+  border: 1px solid #cfcfcf;
   border-radius: 5px;
-  box-shadow: inset 0 1px 2px rgba(31, 41, 55, 0.06);
-  color: #4d465c;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  color: #333333;
   font: inherit;
   font-size: 15px;
   font-weight: 500;
@@ -126,8 +126,8 @@ main {
 }
 
 .stripe-field select {
-  background-image: linear-gradient(45deg, transparent 50%, #4d465c 50%),
-    linear-gradient(135deg, #4d465c 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, #4a4a4a 50%),
+    linear-gradient(135deg, #4a4a4a 50%, transparent 50%);
   background-position: calc(100% - 16px) 16px, calc(100% - 11px) 16px;
   background-repeat: no-repeat;
   background-size: 5px 5px, 5px 5px;
@@ -211,7 +211,7 @@ h2 {
 }
 
 .table th {
-  background: #ecebe5;
+  background: #eeeeee;
   color: #3a3d42;
 }
 
@@ -221,7 +221,7 @@ h2 {
   min-height: 26px;
   padding: 0 8px;
   border-radius: 999px;
-  background: #e9f5f2;
+  background: #eeeeee;
   color: var(--accent);
   font-size: 12px;
   font-weight: 700;
@@ -229,7 +229,7 @@ h2 {
 
 .status[data-status="needs_review"],
 .status[data-status="rejected"] {
-  background: #fff1ed;
+  background: #eeeeee;
   color: var(--danger);
 }
 
@@ -292,8 +292,8 @@ h2 {
 }
 
 .filter.active {
-  background: #1f2937;
-  border-color: #1f2937;
+  background: #202124;
+  border-color: #202124;
   color: #fff;
 }
 
@@ -346,19 +346,19 @@ h2 {
 }
 
 .sample-grid code {
-  background: #f1f5f4;
+  background: #f4f4f4;
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 4px 7px;
 }
 
 .notice {
-  border-color: #99d8c9;
-  color: #0f766e;
+  border-color: #bdbdbd;
+  color: #3a3a3a;
 }
 
 .notice.error {
-  border-color: #f2b8ad;
+  border-color: #bdbdbd;
   color: var(--danger);
 }
 
@@ -381,9 +381,9 @@ h2 {
 }
 
 .json-output {
-  background: #111827;
+  background: #202124;
   border-radius: 8px;
-  color: #e5e7eb;
+  color: #f2f2f2;
   font-size: 13px;
   line-height: 1.5;
   margin: 8px 0 0;

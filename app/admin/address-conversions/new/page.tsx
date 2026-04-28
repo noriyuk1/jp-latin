@@ -1,3 +1,5 @@
+import { japanesePrefectures } from "../../../../lib/prefectures.ts";
+
 export default function NewAddressConversionPage() {
   return (
     <main className="converter-shell">
@@ -35,8 +37,11 @@ export default function NewAddressConversionPage() {
           <label className="stripe-field">
             <span>都道府県</span>
             <select name="state" defaultValue="千葉県">
-              <option value="千葉県">千葉県 - Chiba</option>
-              <option value="東京都">東京都 - Tokyo</option>
+              {japanesePrefectures.map(([prefectureJa, prefectureEn]) => (
+                <option key={prefectureJa} value={prefectureJa}>
+                  {prefectureJa} - {prefectureEn}
+                </option>
+              ))}
             </select>
           </label>
 
