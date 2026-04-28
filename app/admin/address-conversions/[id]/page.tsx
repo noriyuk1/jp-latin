@@ -138,7 +138,32 @@ export default async function AddressConversionReviewPage({
         <section className="panel stack" style={{ marginTop: 16 }}>
           <h2>Building-name conversion</h2>
           <div>Model: {formatModelName(record.aiBuildingNameResult.model)}</div>
-          <div>Confidence: {record.aiBuildingNameResult.confidence}</div>
+          <div className="confidence-line">
+            <span>Confidence: {record.aiBuildingNameResult.confidence}</span>
+            <details className="confidence-help">
+              <summary aria-label="Open confidence definition">(i)</summary>
+              <div className="confidence-panel">
+                <strong>Confidence definition</strong>
+                <dl>
+                  <dt>high</dt>
+                  <dd>
+                    GPT believes the Latin output is straightforward and should be usable
+                    as-is, with no Japanese characters and room/unit info preserved.
+                  </dd>
+                  <dt>medium</dt>
+                  <dd>
+                    Usable-looking output, but the model had some uncertainty, usually
+                    because the building name could have multiple readings or styles.
+                  </dd>
+                  <dt>low</dt>
+                  <dd>
+                    Risky output, often because Japanese remains, the reading is unclear,
+                    or the model could not confidently preserve the building identity.
+                  </dd>
+                </dl>
+              </div>
+            </details>
+          </div>
         </section>
       ) : null}
     </main>

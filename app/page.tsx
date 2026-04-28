@@ -63,7 +63,9 @@ export default async function HomePage({
   return (
     <main className="converter-shell">
       <details className="examples-menu">
-        <summary className="button link-button example-trigger">Example auto-fill</summary>
+        <summary className="button link-button example-trigger">
+          Example JP address auto-fill
+        </summary>
         <section className="examples-panel" aria-label="Example addresses">
           <div className="example-title">Choose an example</div>
           <div className="example-list">
