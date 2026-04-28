@@ -10,7 +10,7 @@ Internal TypeScript/Next.js implementation for converting Japanese shipping addr
 - Address Line 2/building-name conversion through a Convex action with a deterministic local fallback.
 - Name conversion from kana/furigana to UPS-safe Latin text with WanaKana.
 - Direct Japanese address form and UPS Latin output page.
-- Convex persistence and Japan Post CSV import tools.
+- Convex persistence and command-line Japan Post CSV import tools.
 - Node tests for address, name, postal-code, and validation behavior.
 
 ## Setup
@@ -31,7 +31,7 @@ NEXT_PUBLIC_CONVEX_URL=https://aware-buzzard-478.convex.cloud
 
 Never add `OPENAI_API_KEY` to any `NEXT_PUBLIC_*` variable. Do not set it in Netlify for this app; the OpenAI call runs in Convex.
 
-## Client review flow
+## Conversion flow
 
 Open `/` and enter the address in Japanese. The app returns a UPS-compatible Latin-character address payload.
 
@@ -64,5 +64,3 @@ Japan Post publishes `KEN_ALL_ROME.ZIP`; extract `KEN_ALL_ROME.CSV`, then import
 NEXT_PUBLIC_CONVEX_URL=https://aware-buzzard-478.convex.cloud \
 npm run import:japan-post-rome -- /path/to/KEN_ALL_ROME.CSV
 ```
-
-You can also import CSV text from `/admin/japan-post-csv/import`.

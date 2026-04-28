@@ -1,10 +1,3 @@
-export type ConversionStatus =
-  | "pending"
-  | "converted"
-  | "needs_review"
-  | "approved"
-  | "rejected";
-
 export type Confidence = "high" | "medium" | "low";
 
 export type OriginalJapaneseAddress = {
@@ -50,19 +43,6 @@ export type BuildingNameConversionResult = {
   needs_review: boolean;
   model?: string;
   reason: string;
-};
-
-export type AddressConversionRecord = {
-  id: string;
-  orderId: string;
-  original: OriginalJapaneseAddress;
-  converted?: UpsAddressPayload;
-  aiBuildingNameResult?: BuildingNameConversionResult;
-  status: ConversionStatus;
-  reviewNotes?: string;
-  approvedBy?: string;
-  createdAt: number;
-  updatedAt: number;
 };
 
 export type ConversionResult = {

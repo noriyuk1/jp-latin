@@ -46,10 +46,9 @@ export async function POST(request: Request) {
   });
 
   if (wantsHtml && record?._id) {
-    return NextResponse.redirect(
-      new URL(`/admin/address-conversions/${record._id}`, request.url),
-      { status: 303 }
-    );
+    return NextResponse.redirect(new URL(`/output/${record._id}`, request.url), {
+      status: 303
+    });
   }
 
   return NextResponse.json(record, { status: 201 });

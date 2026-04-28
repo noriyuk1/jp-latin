@@ -602,16 +602,13 @@ export function validateUpsAddressPayload(payload: {
 
 ```text
 /app/api/address-conversions/create/route.ts
-/app/api/address-conversions/[id]/approve/route.ts
-/app/api/address-conversions/[id]/rerun/route.ts
-/app/api/admin/japan-post-csv/import/route.ts
 ```
 
 ### 13.2 Suggested pages
 
 ```text
-/app/admin/address-conversions/page.tsx
-/app/admin/address-conversions/[id]/page.tsx
+/app/page.tsx
+/app/output/[id]/page.tsx
 ```
 
 ### 13.3 Conversion function
