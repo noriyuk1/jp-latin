@@ -124,11 +124,15 @@ export default async function OutputPage({
             <p>
               <code>addressLine1</code>, <code>city</code>, <code>state</code>,{" "}
               <code>postalCode</code>, and <code>country</code> are formatted for
-              UPS using Japan Post romanized address data, the entered postal code,
-              and Japan&apos;s ISO country code <code>JP</code> from{" "}
+              UPS using Japan Post romanized address data from{" "}
               <a href="https://www.post.japanpost.jp/zipcode/dl/roman-zip.html">
                 post.japanpost.jp&apos;s public data
-              </a>.
+              </a>
+              {". "}
+              Address numbers are cleaned automatically, including full-width
+              numbers and Japanese separators such as <code>－</code>, <code>ー</code>,
+              and numeric <code>の</code>, so <code>大塚町 一の二の三</code> becomes{" "}
+              <code>1-2-3 OTSUKACHO</code>.
             </p>
           </div>
           <div>
