@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
 :root {
   color-scheme: light;
   --bg: #f6f6f6;
@@ -17,7 +19,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -247,6 +249,16 @@ h2 {
   padding: 14px 16px;
 }
 
+.output-page .ups-output-panel {
+  background: #202124;
+  border-color: #202124;
+  color: #f2f2f2;
+}
+
+.output-page .ups-output-panel h2 {
+  color: #ffffff;
+}
+
 .output-page .stack {
   gap: 8px;
 }
@@ -471,12 +483,13 @@ h2 {
 }
 
 .output-page .json-output {
+  background: transparent;
   border-radius: 6px;
   font-size: 12px;
   line-height: 1.42;
   margin: 0;
   min-height: 0;
-  padding: 12px 14px;
+  padding: 0;
 }
 
 .output-explanation {
@@ -578,19 +591,22 @@ h2 {
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
   color: #333333;
   display: grid;
-  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 14px;
   left: 50%;
-  padding: 18px;
+  line-height: 1.45;
+  padding: 22px 24px;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(520px, calc(100vw - 32px));
+  width: min(620px, calc(100vw - 32px));
   z-index: 4;
 }
 
 .confidence-panel dl {
   display: grid;
-  gap: 6px 10px;
+  gap: 12px 18px;
   grid-template-columns: max-content 1fr;
   margin: 0;
 }
@@ -602,6 +618,7 @@ h2 {
 
 .confidence-panel dd {
   color: #555555;
+  font-weight: 500;
   margin: 0;
 }
 

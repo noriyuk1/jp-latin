@@ -102,7 +102,7 @@ export default async function AddressConversionReviewPage({
           <OriginalRow label="Phone" value={record.original.phone} />
         </section>
 
-        <section className="panel stack">
+        <section className="panel stack ups-output-panel">
           <h2>UPS-compatible Latin address</h2>
           {upsPayload ? (
             <pre className="json-output">{JSON.stringify(upsPayload, null, 2)}</pre>
@@ -121,14 +121,18 @@ export default async function AddressConversionReviewPage({
             <strong>Address database</strong>
             <p>
               <code>addressLine1</code> and <code>city</code> are built from the
-              official Japan Post romanized CSV database from post.japanpost.jp.
+              official Japan Post romanized CSV database from{" "}
+              <a href="https://www.post.japanpost.jp/zipcode/dl/roman-zip.html">
+                post.japanpost.jp&apos;s public data
+              </a>.
             </p>
           </div>
           <div>
             <strong>Building-name conversion</strong>
             <p>
-              <code>addressLine2</code> is converted by OpenAI through a Convex
-              backend action so Japanese building names become UPS-compatible Latin text.
+              <code>addressLine2</code> is converted by an LLM into UPS-compatible
+              Latin text that keeps Japanese building names recognizable for delivery
+              staff in Japan and preserves room details to reduce shipping errors.
             </p>
             {record.aiBuildingNameResult ? (
               <p className="conversion-meta">
@@ -142,7 +146,7 @@ export default async function AddressConversionReviewPage({
                       <dl>
                         <dt>high</dt>
                         <dd>
-                          GPT believes the Latin output is straightforward and should be
+                          The model considers the Latin output straightforward and
                           usable as-is, with no Japanese characters and room/unit info
                           preserved.
                         </dd>
@@ -169,8 +173,8 @@ export default async function AddressConversionReviewPage({
             <strong>Name yomigana</strong>
             <p>
               The entered kana reading is converted to Latin letters with{" "}
-              <a href="https://github.com/WaniKani/WanaKana">WanaKana</a>. Kanji
-              name readings are not guessed automatically.
+              <a href="https://github.com/WaniKani/WanaKana">WanaKana</a> for the
+              UPS <code>name</code> field.
             </p>
           </div>
         </div>
