@@ -134,7 +134,7 @@ export default async function AddressConversionReviewPage({
             <p>
               <code>addressLine2</code> is converted by an LLM into UPS-compatible
               Latin text that keeps Japanese building names recognizable for delivery
-              staff in Japan and preserves room details to reduce shipping errors.
+              staff in Japan, with room numbers kept clear.
             </p>
             {record.aiBuildingNameResult ? (
               <p className="conversion-meta">
