@@ -86,44 +86,5 @@ export async function convertBuildingNameWithAI(input: {
   cityLatin?: string;
   townLatin?: string;
 }): Promise<BuildingNameConversionResult> {
-  if (!process.env.OPENAI_API_KEY) {
-    return fallbackConvertBuildingName(input.addressLine2);
-  }
-
-  const { default: OpenAI } = await import("openai");
-  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-  const response = await openai.responses.create({
-    model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-    input: [
-      {
-        role: "system",
-        content: `You convert Japanese building names into UPS-compatible Latin-character address text.
-Rules:
-- Do not create an official English translation.
-- The goal is Latin-character formatting for UPS shipping labels.
-- Preserve the original building identity as much as possible.
-- Prefer transliteration or restoration of obvious katakana loanwords.
-- Do not semantically translate Japanese building names unless the building is a known public facility with a widely used English name.
-- Preserve room numbers, floor numbers, building numbers, and unit numbers exactly.
-- Convert common building terms: マンション -> Mansion, アパート -> Apartment, ハイツ -> Heights, コーポ -> Corpo, メゾン -> Maison, ビル -> Bldg, タワー -> Tower, レジデンス -> Residence, 荘 -> So, 階 -> F, 号室 -> remove if the room number remains clear.
-- Do not output Japanese characters in ups_address_line2.
-- If uncertain, set needs_review to true.
-- Return JSON only.`
-      },
-      {
-        role: "user",
-        content: JSON.stringify(input)
-      }
-    ],
-    text: {
-      format: {
-        type: "json_schema",
-        name: "building_name_conversion",
-        strict: true,
-        schema: buildingNameSchema
-      }
-    }
-  });
-
-  return JSON.parse(response.output_text) as BuildingNameConversionResult;
+  return fallbackConvertBuildingName(input.addressLine2);
 }

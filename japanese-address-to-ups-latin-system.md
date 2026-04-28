@@ -472,44 +472,12 @@ Rules:
 - Return JSON only.
 ```
 
-### 10.6 Example OpenAI call
+### 10.6 Convex action boundary
 
 ```ts
-import OpenAI from "openai";
-
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-export async function convertBuildingNameWithAI(input: {
-  addressLine2: string;
-  prefectureLatin?: string;
-  cityLatin?: string;
-  townLatin?: string;
-}) {
-  const response = await openai.responses.create({
-    model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-    input: [
-      {
-        role: "system",
-        content: `You convert Japanese building names into UPS-compatible Latin-character address text.
-Do not create an official English translation. Preserve building identity. Preserve room and floor numbers exactly. Return JSON only.`,
-      },
-      {
-        role: "user",
-        content: JSON.stringify(input),
-      },
-    ],
-    text: {
-      format: {
-        type: "json_schema",
-        name: "building_name_conversion",
-        strict: true,
-        schema: buildingNameSchema,
-      },
-    },
-  });
-
-  return JSON.parse(response.output_text);
-}
+// The OpenAI call runs inside convex/buildingNames.ts.
+// Keep OPENAI_API_KEY in Convex environment variables only.
+// Next.js and Netlify should call the Convex action and should not hold the key.
 ```
 
 ---
@@ -782,7 +750,7 @@ Fields should be editable before approval.
 - Store both the original Japanese address and converted UPS address.
 - Store audit logs for manual edits and approvals.
 - Never automatically create a UPS shipment if the final payload contains Japanese characters.
-- Keep `OPENAI_API_KEY` server-side only.
+- Keep `OPENAI_API_KEY` in Convex environment variables only.
 - Do not expose AI conversion prompts or raw API keys in the browser.
 
 ---
@@ -790,10 +758,15 @@ Fields should be editable before approval.
 ## 16. Environment Variables
 
 ```bash
-OPENAI_API_KEY=...
-OPENAI_MODEL=gpt-4o-mini
 CONVEX_DEPLOYMENT=...
 NEXT_PUBLIC_CONVEX_URL=...
+```
+
+Set these only in Convex, not Netlify or any client-visible variable:
+
+```bash
+OPENAI_API_KEY=...
+OPENAI_MODEL=gpt-4o-mini
 ```
 
 ---

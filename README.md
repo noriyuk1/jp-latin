@@ -7,7 +7,7 @@ Internal TypeScript/Next.js implementation for converting Japanese shipping addr
 - Japan Post romanized postal-code CSV mapping utilities.
 - Address normalization and Japanese-character validation.
 - Address Line 1 conversion using postal-code records.
-- Address Line 2/building-name conversion with a configurable OpenAI model and deterministic fallback.
+- Address Line 2/building-name conversion through a Convex action with a deterministic local fallback.
 - Name conversion from kana/furigana to UPS-safe Latin text with WanaKana.
 - Direct Japanese address form and UPS Latin output page.
 - Convex persistence and Japan Post CSV import tools.
@@ -21,17 +21,15 @@ cp .env.example .env.local
 npm run dev
 ```
 
-The OpenAI key is optional for local tests. If it is missing, building-name conversion uses a conservative local transliteration fallback and marks uncertain results for review.
+The OpenAI key is not needed in Netlify or local `.env.local`. For AI building-name conversion, set `OPENAI_API_KEY` only in the Convex deployment environment.
 
 For the shared client-review build, set these Netlify environment variables:
 
 ```text
 NEXT_PUBLIC_CONVEX_URL=https://aware-buzzard-478.convex.cloud
-OPENAI_API_KEY=...
-OPENAI_MODEL=gpt-4o-mini
 ```
 
-`OPENAI_API_KEY` must not use the `NEXT_PUBLIC_` prefix.
+Never add `OPENAI_API_KEY` to any `NEXT_PUBLIC_*` variable. Do not set it in Netlify for this app; the OpenAI call runs in Convex.
 
 ## Client review flow
 
@@ -46,7 +44,7 @@ If the recipient name is kanji, enter the reading in `フリガナ`. WanaKana no
 3. Submit the form.
 4. Use the generated UPS Latin fields or JSON payload.
 
-Building-name conversion uses `OPENAI_API_KEY` when it is present in the server environment. Without the key, the app uses the local fallback converter and marks results for review.
+Building-name conversion runs through the Convex action. Local fallback conversion is used only when the converter is called without the Convex action, and those results are marked for review.
 
 ## Test
 
