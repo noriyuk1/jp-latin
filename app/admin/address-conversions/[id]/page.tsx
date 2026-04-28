@@ -95,7 +95,7 @@ export default async function AddressConversionReviewPage({
           <span className="confidence-line">
             Confidence: {record.aiBuildingNameResult.confidence}
             <details className="confidence-help">
-              <summary aria-label="Open confidence definition">(i)</summary>
+              <summary aria-label="Open confidence definition">ℹ️</summary>
               <div className="confidence-panel">
                 <strong>Confidence definition</strong>
                 <dl>

@@ -502,18 +502,28 @@ h2 {
   position: relative;
 }
 
+.confidence-help[open]::before {
+  background: rgba(246, 246, 246, 0.72);
+  content: "";
+  inset: 0;
+  position: fixed;
+  z-index: 2;
+}
+
 .confidence-help summary {
   align-items: center;
   border: 1px solid var(--border);
   border-radius: 999px;
   cursor: pointer;
   display: inline-flex;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   height: 22px;
   justify-content: center;
   list-style: none;
+  position: relative;
   width: 22px;
+  z-index: 3;
 }
 
 .confidence-help summary::-webkit-details-marker {
@@ -524,17 +534,17 @@ h2 {
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
   color: #333333;
   display: grid;
   gap: 10px;
-  left: 0;
-  margin-top: 8px;
-  padding: 14px;
-  position: absolute;
-  top: 100%;
-  width: min(460px, calc(100vw - 32px));
-  z-index: 2;
+  left: 50%;
+  padding: 18px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(520px, calc(100vw - 32px));
+  z-index: 4;
 }
 
 .confidence-panel dl {
